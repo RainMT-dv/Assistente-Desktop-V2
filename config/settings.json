@@ -1,0 +1,60 @@
+{
+    "assistant": {
+        "name": "Assistente",
+        "wake_words": [
+            "assistente",
+            "hey assistente",
+            "oi assistente"
+        ],
+        "selected_card": "assistente"
+    },
+    "tts": {
+        "engine": "edge-tts",
+        "voice": "pt-BR-FranciscaNeural",
+        "azure_speech_key": "",
+        "azure_speech_region": "brazilsouth"
+    },
+    "llm": {
+        "provider": "openrouter",
+        "openrouter_api_key": "",
+        "openrouter_model": "google/gemma-3-27b-it",
+        "max_history_messages": 6,
+        "think_mode": false
+    },
+    "stt": {
+        "engine": "faster-whisper",
+        "model_cpu": "base",
+        "model_gpu": "small",
+        "compute_type": "int8",
+        "device": "cpu",
+        "language": "pt",
+        "beam_size": 5,
+        "vad_filter": true,
+        "vad_min_silence_ms": 500,
+        "vad_speech_pad_ms": 200
+    },
+    "audio": {
+        "sample_rate": 16000,
+        "channels": 1,
+        "chunk_size": 4096,
+        "silence_threshold": 500,
+        "max_silence_chunks": 30,
+        "min_speech_duration": 0.5,
+        "noise_filter_enabled": true,
+        "noise_filter_highpass": 80,
+        "noise_filter_lowpass": 7500
+    },
+    "dashboard": {
+        "host": "0.0.0.0",
+        "port": 5000,
+        "debug": false
+    },
+    "paths": {
+        "apps_db": "config/apps.json",
+        "brain_db": "config/brain.json",
+        "emotion_profiles": "config/emotion_profiles.json",
+        "emotion_guidance": "config/emotion_guidance.json",
+        "slang_dictionary": "config/slang_dictionary.json",
+        "audio_output_dir": "audio_output"
+    }
+}

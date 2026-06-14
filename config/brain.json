@@ -1,0 +1,14 @@
+{
+    "current_emotion": "Feliz",
+    "emotion_intensity": 0.5,
+    "user_emotion": "neutral",
+    "user_emotion_confidence": 0.0,
+    "last_comment_time": null,
+    "last_interaction_time": null,
+    "interaction_count": 0,
+    "user_profile": {
+        "name": "",
+        "tone": "humorístico",
+        "interests": []
+    }
+}

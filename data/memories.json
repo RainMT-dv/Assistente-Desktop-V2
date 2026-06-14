@@ -1,0 +1,14 @@
+{
+  "user_profile": {
+    "name": null,
+    "location": null,
+    "interests": [],
+    "preferences": {},
+    "birthday": null,
+    "age": null
+  },
+  "facts": [],
+  "conversation_summaries": [],
+  "last_seen": null,
+  "session_log": []
+}

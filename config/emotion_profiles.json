@@ -1,0 +1,14 @@
+{
+    "Feliz": {
+        "edge_tts": {"rate": "+15%", "pitch": "+6Hz", "volume": "+30%"},
+        "azure_style": "cheerful",
+        "avatar_blendshape": "Sorriso",
+        "description": "alegria moderada, sorriso na voz"
+    },
+    "Neutra": {
+        "edge_tts": {"rate": "+8%", "pitch": "+3Hz", "volume": "+15%"},
+        "azure_style": null,
+        "avatar_blendshape": "Neutra",
+        "description": "baseline, sem modulação"
+    }
+}
