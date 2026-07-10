@@ -2,7 +2,7 @@
 
 Este repositório contém o código-fonte do **Assistente Pessoal Desktop Proativo e Multimodal (V2)**. Este assistente interage via voz e interface web (Dashboard), processa comandos locais, possui sistema de emoções em tempo real e reage proativamente ao contexto do usuário.
 
-> **Nota:** Esta é a V2 — Dê uma olhada na [V1](https://github.com/RainMT-dv/Assistente-Pessoal-Desktop-Proativo-e-Multimodal).
+> **Nota:** Esta é a V2 — Dê uma olhada na [V1]([https://github.com/RainMT-dv/Assistente-Pessoal-Desktop-Proativo-e-Multimodal](https://github.com/RainMT-dv/Assistente-Desktop-V1)).
 
 ---
 
