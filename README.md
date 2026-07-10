@@ -2,17 +2,19 @@
 
 Este repositório contém o código-fonte do **Assistente Pessoal Desktop Proativo e Multimodal (V2)**. Este assistente interage via voz e interface web (Dashboard), processa comandos locais, possui sistema de emoções em tempo real e reage proativamente ao contexto do usuário.
 
+> **Nota:** Esta é a V2 — Dê uma olhada na [V1](https://github.com/RainMT-dv/Assistente-Pessoal-Desktop-Proativo-e-Multimodal).
+
 ---
 
 ## 🚀 Funcionalidades da V2
 
 - **Transcrição de Voz Local (STT)**: Utiliza `faster-whisper` em tempo real com alta precisão e baixo consumo de recursos.
-- **Síntese de Voz Natural (TTS)**: Integração com `edge-tts` para uma voz humana, expressiva e natural sem custos de API.
-- **Múltiplos Provedores de LLM**: Suporte para OpenRouter, Groq, Cerebras, DeepSeek, SiliconFlow, Nvidia NIM e modelos locais via Ollama com fallback inteligente.
-- **Personalidade Dinâmica & Emoções**: Sistema de estado emocional dinâmico baseado no contexto da conversa e perfil do usuário.
-- **Dashboard Web Interativo**: Interface desenvolvida em Flask com WebSockets para visualizar o estado atual da IA, transcrição em tempo real, expressões emocionais e histórico de logs.
+- **Síntese de Voz Natural (TTS)**: Integração com `edge-tts` para ter voz (Sim, é robotica infelismente), mas não tem custos de API.
+- **Múltiplos Provedores de LLM**: Suporte para OpenRouter, Groq, Cerebras, DeepSeek, SiliconFlow, Nvidia NIM e modelos locais via Ollama com fallback inteligente. (Nunca cheguei a testar, na teoria funciona)
+- **Personalidade Dinâmica & Emoções**: Sistema de estado emocional dinâmico baseado no contexto da conversa e perfil do usuário. 
+- **Dashboard Web Interativo**: Interface desenvolvida em Flask com WebSockets para visualizar o estado atual da IA, transcrição em tempo real, expressões emocionais e histórico de logs.  <--- INCOMPLETO
 - **Ações Locais (OS Bridge)**: Capaz de ler a tela, obter o texto da área de transferência e abrir aplicativos registrados localmente através de comandos de voz.
-- **Comentários Proativos**: O assistente pode intervir e falar de forma autônoma com base no contexto do que o usuário está fazendo.
+- **Comentários Proativos**: O assistente pode intervir e falar de forma autônoma com base no contexto do que o usuário está fazendo. (Simples)
 
 ---
 
@@ -20,7 +22,6 @@ Este repositório contém o código-fonte do **Assistente Pessoal Desktop Proati
 
 Antes de iniciar, você precisará ter instalado em sua máquina:
 1. **Python 3.10 ou superior** (Recomendado: **Python 3.12**).
-   - *Importante*: Lembre-se de marcar a opção **"Add python.exe to PATH"** durante a instalação.
 2. Drivers NVIDIA CUDA e Toolkit (Opcional, mas altamente recomendado caso possua GPU dedicada para aceleração do Whisper).
 
 ---
@@ -31,12 +32,14 @@ Antes de iniciar, você precisará ter instalado em sua máquina:
 Baixe este repositório em sua máquina local.
 
 ### 2. Configurar o Ambiente Virtual e Dependências
-Na pasta do projeto, há um script automatizado chamado `SETUP.bat`. Ele criará o ambiente virtual em uma pasta chamada `venv` (adicionada ao `.gitignore`), atualizará o gerenciador de pacotes `pip`, instalará o PyTorch com suporte a CUDA 12.1 (com fallback automático para CPU caso não encontre GPU compatível), instalará todas as dependências do `requirements.txt` e fará o download do modelo Whisper Base padrão.
+Na pasta do projeto, há um script automatizado chamado `SETUP.bat`. Ele criará o ambiente virtual em uma pasta chamada `venv`, atualizará o gerenciador de pacotes `pip`, instalará o PyTorch com suporte a **CUDA 12.1** (com fallback automático para CPU caso não encontre GPU compatível), instalará todas as dependências do `requirements.txt` e fará o download do modelo Whisper Base padrão.
 
 Basta dar dois cliques no arquivo:
 ```bash
 SETUP.bat
 ```
+**(Se ocorrer um erro, tente executar como administrador)**
+
 Aguarde a finalização de todas as etapas.
 
 ### 3. Configurar as Chaves de API
@@ -44,6 +47,7 @@ Aguarde a finalização de todas as etapas.
    ```bash
    copy .env.example .env
    ```
+
 2. Abra o arquivo `.env` com seu editor de texto preferido e adicione as suas chaves de API:
    - `OPENROUTER_API_KEY`: API Key do OpenRouter.
    - `GROQ_API_KEY`: API Key do Groq (muito rápida para respostas em milissegundos).
@@ -61,6 +65,8 @@ Com as dependências instaladas e o arquivo `.env` configurado, inicie o assiste
 ```bash
 RUN.bat
 ```
+**(Se ocorrer um erro, tente executar como administrador)**
+
 
 Após a inicialização do terminal:
 1. O assistente iniciará o servidor do dashboard local.
