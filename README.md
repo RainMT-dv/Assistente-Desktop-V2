@@ -1,97 +1,111 @@
-# Assistente Pessoal Desktop Proativo e Multimodal (V2)
+<div align="center">
 
-Este repositório contém o código-fonte do **Assistente Pessoal Desktop Proativo e Multimodal (V2)**. Este assistente interage via voz e interface web (Dashboard), processa comandos locais, possui sistema de emoções em tempo real e reage proativamente ao contexto do usuário.
+  # Assistente Desktop V2
+  *Assistente pessoal de IA proativo com voz, emoções e dashboard web*
 
-> **Nota:** Esta é a V2 — Dê uma olhada na [V1](https://github.com/RainMT-dv/Assistente-Desktop-V1).
+  [![Python](https://img.shields.io/badge/Python-3.10+-3776ab?style=flat-square)](https://python.org)
+  [![Whisper](https://img.shields.io/badge/STT-faster--whisper-orange?style=flat-square)](https://github.com/SYSTRAN/faster-whisper)
+  [![Edge TTS](https://img.shields.io/badge/TTS-edge--tts-blue?style=flat-square)](https://github.com/rany2/edge-tts)
+  [![Licença](https://img.shields.io/badge/licença-MIT-blue?style=flat-square)](LICENSE)
 
----
+  [Funcionalidades](#funcionalidades) • [Primeiros passos](#primeiros-passos) • [Como executar](#como-executar) • [Estrutura](#estrutura-de-pastas)
 
-## 🚀 Funcionalidades da V2
-
-- **Transcrição de Voz Local (STT)**: Utiliza `faster-whisper` em tempo real com alta precisão e baixo consumo de recursos.
-- **Síntese de Voz Natural (TTS)**: Integração com `edge-tts` para ter voz (Sim, é robotica infelismente), mas não tem custos de API.
-- **Múltiplos Provedores de LLM**: Suporte para OpenRouter, Groq, Cerebras, DeepSeek, SiliconFlow, Nvidia NIM e modelos locais via Ollama com fallback inteligente. (Nunca cheguei a testar, na teoria funciona)
-- **Personalidade Dinâmica & Emoções**: Sistema de estado emocional dinâmico baseado no contexto da conversa e perfil do usuário. 
-- **Dashboard Web Interativo**: Interface desenvolvida em Flask com WebSockets para visualizar o estado atual da IA, transcrição em tempo real, expressões emocionais e histórico de logs.  <--- INCOMPLETO
-- **Ações Locais (OS Bridge)**: Capaz de ler a tela, obter o texto da área de transferência e abrir aplicativos registrados localmente através de comandos de voz.
-- **Comentários Proativos**: O assistente pode intervir e falar de forma autônoma com base no contexto do que o usuário está fazendo. (Simples)
+</div>
 
 ---
 
-## 🛠️ Pré-requisitos
+> [!WARNING]
+> Este projeto está **incompleto**. Algumas funcionalidades descritas aqui funcionam na teoria mas não foram totalmente testadas. Veja a [V1](https://github.com/RainMT-dv/Assistente-Desktop-V1) para uma versão mais simples e estável.
 
-Antes de iniciar, você precisará ter instalado em sua máquina:
-1. **Python 3.10 ou superior** (Recomendado: **Python 3.12**).
-2. Drivers NVIDIA CUDA e Toolkit (Opcional, mas altamente recomendado caso possua GPU dedicada para aceleração do Whisper).
+Assistente de desktop com interação por voz, personalidade dinâmica com estado emocional e um dashboard web em tempo real. Suporta múltiplos provedores de LLM e é capaz de executar ações no sistema operacional por comando de voz.
 
----
+## Funcionalidades
 
-## 📦 Instalação e Configuração
+- **Transcrição de voz local (STT)** via `faster-whisper` — rápido e sem custo de API
+- **Síntese de voz (TTS)** com `edge-tts` — sem custo de API
+- **Múltiplos provedores de LLM** com fallback inteligente: OpenRouter, Groq, Cerebras, DeepSeek, SiliconFlow, Nvidia NIM e modelos locais via Ollama
+- **Personalidade e emoções dinâmicas** baseadas no contexto da conversa e perfil do usuário
+- **Dashboard web** em Flask com WebSockets para estado da IA, transcrição em tempo real e histórico *(incompleto)*
+- **Ações locais (OS Bridge)** — ler tela, área de transferência e abrir aplicativos por voz
+- **Comentários proativos** — o assistente pode falar de forma autônoma com base no contexto
 
-### 1. Clonar ou baixar o repositório
-Baixe este repositório em sua máquina local.
+## Primeiros passos
 
-### 2. Configurar o Ambiente Virtual e Dependências
-Na pasta do projeto, há um script automatizado chamado `SETUP.bat`. Ele criará o ambiente virtual em uma pasta chamada `venv`, atualizará o gerenciador de pacotes `pip`, instalará o PyTorch com suporte a **CUDA 12.1** (com fallback automático para CPU caso não encontre GPU compatível), instalará todas as dependências do `requirements.txt` e fará o download do modelo Whisper Base padrão.
+### Requisitos
 
-Basta dar dois cliques no arquivo:
+- Python 3.10+ (recomendado: **Python 3.12**)
+- Drivers NVIDIA CUDA *(opcional, mas recomendado para acelerar o Whisper em GPU)*
+
+### Instalação
+
+**1. Clone o repositório**
+
 ```bash
+git clone https://github.com/RainMT-dv/Assistente-Desktop-V2.git
+cd Assistente-Desktop-V2
+```
+
+**2. Configure o ambiente e instale as dependências**
+
+Dê dois cliques em `SETUP.bat` — ele cria o ambiente virtual, instala o PyTorch com suporte a CUDA 12.1 (com fallback para CPU) e baixa o modelo Whisper Base.
+
+```
 SETUP.bat
 ```
-**(Se ocorrer um erro, tente executar como administrador)**
 
-Aguarde a finalização de todas as etapas.
+> [!TIP]
+> Se ocorrer um erro, tente executar como administrador.
 
-### 3. Configurar as Chaves de API
-1. Duplique ou renomeie o arquivo `.env.example` para `.env`:
-   ```bash
-   copy .env.example .env
-   ```
+**3. Configure as chaves de API**
 
-2. Abra o arquivo `.env` com seu editor de texto preferido e adicione as suas chaves de API:
-   - `OPENROUTER_API_KEY`: API Key do OpenRouter.
-   - `GROQ_API_KEY`: API Key do Groq (muito rápida para respostas em milissegundos).
-   - `CEREBRAS_API_KEY`: API Key do Cerebras.
-   - `DEEPSEEK_API_KEY`: API Key do DeepSeek.
-   - `SILICONFLOW_API_KEY`: API Key do SiliconFlow.
-   - `NVIDIA_API_KEY`: API Key da Nvidia.
-   - `OLLAMA_API_KEY`: Padrão: `ollama` para chamadas locais.
+Duplique o `.env.example` e renomeie para `.env`:
 
----
-
-## 🏃 Como Executar
-
-Com as dependências instaladas e o arquivo `.env` configurado, inicie o assistente dando dois cliques no arquivo:
 ```bash
+copy .env.example .env
+```
+
+Abra o `.env` e adicione as chaves dos provedores que quiser usar:
+
+| Variável | Provedor |
+|---|---|
+| `OPENROUTER_API_KEY` | OpenRouter |
+| `GROQ_API_KEY` | Groq |
+| `CEREBRAS_API_KEY` | Cerebras |
+| `DEEPSEEK_API_KEY` | DeepSeek |
+| `SILICONFLOW_API_KEY` | SiliconFlow |
+| `NVIDIA_API_KEY` | Nvidia NIM |
+| `OLLAMA_API_KEY` | Ollama (padrão: `ollama`) |
+
+## Como executar
+
+Com o `.env` configurado, dê dois cliques em `RUN.bat`:
+
+```
 RUN.bat
 ```
-**(Se ocorrer um erro, tente executar como administrador)**
 
+O assistente iniciará o servidor do dashboard. Acesse [http://localhost:5000](http://localhost:5000) no navegador para visualizar o painel.
 
-Após a inicialização do terminal:
-1. O assistente iniciará o servidor do dashboard local.
-2. Por padrão, você poderá acessar o painel de visualização pelo navegador em: [http://localhost:5000](http://localhost:5000).
-3. Pressione a tecla configurada (ou use comandos de voz) para falar com a IA!
+## Estrutura de pastas
 
----
-
-## 📂 Estrutura de Pastas
-
-```text
-├── cards/             # Elementos visuais e componentes do Dashboard
-├── config/            # Arquivos de configurações (.json)
-│   ├── apps.json             # Lista de caminhos para abrir apps pelo Windows
-│   ├── settings.json         # Configurações gerais (STT, TTS, LLM, etc)
-│   ├── brain.json            # Estado emocional atual da IA
-│   └── slang_dictionary.json # Dicionário de gírias e expressões personalizadas
-├── core/              # Lógica principal da aplicação (STT, TTS, LLM, OS Bridge, etc)
-├── dashboard/         # Servidor web Flask e arquivos estáticos (HTML/CSS/JS)
-├── data/              # Dados de memória persistente da IA
-│   ├── memories.json         # Perfil do usuário e memórias coletadas
-│   └── mood.json             # Histórico de humor
-├── main.py            # Ponto de entrada do programa principal
-├── REQUIREMENTS.txt   # Lista de dependências Python
-├── SETUP.bat          # Instalação automatizada do ambiente virtual
-├── RUN.bat            # Execução automatizada do assistente
-└── .gitignore         # Arquivos ignorados pelo Git (.env, venv/, logs/, etc)
 ```
+├── cards/             # Componentes visuais do dashboard
+├── config/
+│   ├── apps.json             # Caminhos dos apps para abrir por voz
+│   ├── settings.json         # Configurações gerais (STT, TTS, LLM...)
+│   ├── brain.json            # Estado emocional atual da IA
+│   └── slang_dictionary.json # Dicionário de gírias personalizadas
+├── core/              # Lógica principal (STT, TTS, LLM, OS Bridge...)
+├── dashboard/         # Servidor Flask e arquivos estáticos
+├── data/
+│   ├── memories.json         # Perfil e memórias do usuário
+│   └── mood.json             # Histórico de humor
+├── main.py            # Ponto de entrada
+├── requirements.txt
+├── SETUP.bat          # Instalação automatizada
+└── RUN.bat            # Execução automatizada
+```
+
+## Contribuindo
+
+Sinta-se à vontade para modificar e melhorar! Crie um fork e publique as suas mudanças.
