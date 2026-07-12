@@ -15,7 +15,7 @@
 ---
 
 > [!WARNING]
-> Este projeto está **incompleto**. Algumas funcionalidades descritas aqui funcionam na teoria mas não foram totalmente testadas. Veja a [V1](https://github.com/RainMT-dv/Assistente-Desktop-V1) para uma versão mais simples e estável.
+> Este projeto está **incompleto** mas é funcional. Algumas funcionalidades descritas aqui funcionam na teoria mas não foram totalmente testadas. Veja a [V1](https://github.com/RainMT-dv/Assistente-Desktop-V1) para uma versão mais simples e estável.
 
 Assistente de desktop com interação por voz, personalidade dinâmica com estado emocional e um dashboard web em tempo real. Suporta múltiplos provedores de LLM e é capaz de executar ações no sistema operacional por comando de voz.
 
